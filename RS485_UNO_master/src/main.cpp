@@ -113,6 +113,9 @@ void setup()
     pinMode(PWM_PIN_YELLOW, OUTPUT);
     pinMode(MAX485_DE, OUTPUT);  // driver output enable
     pinMode(LED_PIN, OUTPUT);  // built-in LED
+    pinMode(FAN_HALL_SENSOR_PIN_0, INPUT_PULLUP);
+    pinMode(FAN_HALL_SENSOR_PIN_1, INPUT_PULLUP);
+    pinMode(FAN_HALL_SENSOR_PIN_2, INPUT_PULLUP);
     
     //variable initialization
     i = 0;
