@@ -11,7 +11,9 @@
 #define FAN_HALL_SENSOR_PIN_0 A0 // read hall sensor value from fan 0 
 #define FAN_HALL_SENSOR_PIN_1 A1 // read hall sensor value from fan 1 
 #define FAN_HALL_SENSOR_PIN_2 A2 // read hall sensor value from fan 2
-#define SLAVE_ID 2 //Slave ID
+//#define SLAVE_ID 2 //Slave ID
+#define DIP0 11
+#define DIP1 12
 #define MAX485_DE 4 //Txen pin
 #define CHECK_FAN_PERIOD 5000 //time interval to check fan speed, unit in millisecond
 #define HALL_TRIGGER HIGH //hall sensor trigger signal
@@ -27,6 +29,8 @@ enum STATE
 enum STATE loop_state;
 
 //Modbus slave control variables
+//slave ID
+uint8_t slave_id = 1;
 //{LED white PWM, LED yellow PWM, Fan speed PWM, LED Switch, Fan Switch}
 byte slave_control_buffer[5] = {250, 250, 250, 0, 0};
 byte recv_buf [10] = {0};
@@ -99,7 +103,10 @@ void setup()
     pinMode(FAN_HALL_SENSOR_PIN_0, INPUT_PULLUP);
     pinMode(FAN_HALL_SENSOR_PIN_1, INPUT_PULLUP);
     pinMode(FAN_HALL_SENSOR_PIN_2, INPUT_PULLUP);
+    pinMode(DIDR0, INPUT_PULLUP);
+    pinMode(DIP1, INPUT_PULLUP);
 
+    slave_id = 1*digitalRead(DIP0) + 2*digitalRead(DIP1);
     loop_state = NORMAL_EXECUTION;
     last_time = millis();
     //initialize functions using default control parameters
@@ -188,7 +195,7 @@ void loop()
         }
         case RECV_MSG:
         {
-            if(recv_buf[0] != SLAVE_ID)
+            if(recv_buf[0] != slave_id)
             {
 #if DEBUG
                 sserial.println("ID Wrong, not my message");
