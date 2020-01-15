@@ -4,7 +4,7 @@
 #include <SoftwareSerial.h>
 #include "RS485_protocol.h"
 
-#define UltrasonicPin A1
+#define UltrasonicPin A3
 #define SS 10 //slave select pin
 #define BUFFSIZE 14
 #define PWM_PIN_WHITE 3 //pwm output for white led
