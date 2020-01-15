@@ -156,15 +156,15 @@ void loop()
             //periodically check fan speed by reading hall sensor
             if((current_time - last_time)>=CHECK_FAN_PERIOD)
             {
-#if 0
-                Serial.println("-----fan cnt-----");
-                Serial.println(fan_cnt_0/(CHECK_FAN_PERIOD/1000));
-                Serial.println(fan_cnt_1/(CHECK_FAN_PERIOD/1000));
-                Serial.println(fan_cnt_2/(CHECK_FAN_PERIOD/1000));
+#if 1
+                sserial.println("-----fan cnt-----");
+                sserial.println(fan_cnt_0/(CHECK_FAN_PERIOD/1000));
+                sserial.println(fan_cnt_1/(CHECK_FAN_PERIOD/1000));
+                sserial.println(fan_cnt_2/(CHECK_FAN_PERIOD/1000));
 #endif
-                fan_status[0] = 31;//fan_cnt_0/(CHECK_FAN_PERIOD/1000);
-                fan_status[1] = 32;//fan_cnt_1/(CHECK_FAN_PERIOD/1000);
-                fan_status[2] = 33;//fan_cnt_2/(CHECK_FAN_PERIOD/1000);
+                fan_status[0] = fan_cnt_0/(CHECK_FAN_PERIOD/1000);
+                fan_status[1] = fan_cnt_1/(CHECK_FAN_PERIOD/1000);
+                fan_status[2] = fan_cnt_2/(CHECK_FAN_PERIOD/1000);
                 fan_cnt_0 = 0;
                 fan_cnt_1 = 0;
                 fan_cnt_2 = 0;
