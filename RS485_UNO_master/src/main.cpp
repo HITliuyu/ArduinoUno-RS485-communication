@@ -170,8 +170,17 @@ ISR (SPI_STC_vect)
     //change PWM output
     case 'b':
         slave_control_buffer[k] = SPDR;
-        if (k >= 4) // k >= sizeof(slave_control_buffer)-1
+        if (k >= 2) // k >= sizeof(slave_control_buffer)-1
         {    
+            slave_control_buffer_update_flag = true;
+        }
+        k++;
+        break;
+    //change LED FAN status
+    case 'c':
+        slave_control_buffer[k+3] = SPDR;
+        if (k >= 1)
+        {
             slave_control_buffer_update_flag = true;
         }
         k++;
