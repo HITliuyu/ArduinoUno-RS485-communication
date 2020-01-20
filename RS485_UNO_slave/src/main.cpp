@@ -32,7 +32,7 @@ enum STATE loop_state;
 //slave ID
 uint8_t slave_id = 1;
 //{LED white PWM, LED yellow PWM, Fan speed PWM, LED Switch, Fan Switch}
-byte slave_control_buffer[5] = {250, 250, 250, 0, 0};
+byte slave_control_buffer[5] = {128, 128, 128, 0, 0};
 byte recv_buf [10] = {0};
 byte fan_status[3] = {0};
 uint32_t current_time = 0;

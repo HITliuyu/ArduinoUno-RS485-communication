@@ -66,7 +66,7 @@ byte checksum;
 
 //Modbus slave control variables
 //{LED white PWM, LED yellow PWM, Fan speed PWM, LED Switch, Fan Switch}
-byte slave_control_buffer[5] = {128, 128, 128, 1, 1};
+byte slave_control_buffer[5] = {128, 128, 128, 0, 0};
 uint16_t slave_active_array[MAX_SLAVE_NUM] = {0};
 bool slave_control_buffer_update_flag = true;
 //bool slave_id_update_flag = true;
@@ -434,4 +434,7 @@ void resetParam()
     i = 0;
     k = 0;
     checksum = 0;
+#if DEBUG
+    sserial.println("SPI finished!");
+#endif
 }  // end of interrupt service routine (ISR) resetParam
