@@ -307,7 +307,7 @@ void loop()
                 fan_cnt_2 = 0;
 
                 last_read_sensor_time = current_time;
-#if 1
+#if 0
                 //only used for test purpose to frequently update slaves
                 slave_control_buffer_update_flag = true;
 #endif
