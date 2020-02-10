@@ -283,8 +283,8 @@ void update_control(void)
     analogWrite(PWM_PIN_WHITE, slave_control_buffer[0]);
     analogWrite(PWM_PIN_YELLOW, slave_control_buffer[1]);
     analogWrite(PWM_PIN_FAN_SPEED, slave_control_buffer[2]);
-    digitalWrite(FAN_PIN, slave_control_buffer[3]);
-    digitalWrite(LED_PIN, slave_control_buffer[4]);
+    digitalWrite(LED_PIN, slave_control_buffer[3]);
+    digitalWrite(FAN_PIN, slave_control_buffer[4]);
 }
 
 void send_ACK()
