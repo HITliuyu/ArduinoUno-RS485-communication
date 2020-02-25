@@ -6,14 +6,14 @@
 #define PWM_PIN_WHITE 3 //pwm output for white led
 #define PWM_PIN_YELLOW 9 // pwm output for yellow led
 #define PWM_PIN_FAN_SPEED 10 //pwm output for fan speed in extention box
-#define FAN_PIN 7 //fan on/off control signal
-#define LED_PIN 8 //LED lamp on/off control signal
+#define FAN_PIN 6 //fan on/off control signal
+#define LED_PIN 7 //LED lamp on/off control signal
 #define FAN_HALL_SENSOR_PIN_0 A0 // read hall sensor value from fan 0 
 #define FAN_HALL_SENSOR_PIN_1 A1 // read hall sensor value from fan 1 
 #define FAN_HALL_SENSOR_PIN_2 A2 // read hall sensor value from fan 2
 //#define SLAVE_ID 2 //Slave ID
-#define DIP0 11
-#define DIP1 12
+#define DIP0 A3
+#define DIP1 A4
 #define MAX485_DE 4 //Txen pin
 #define CHECK_FAN_PERIOD 5000 //time interval to check fan speed, unit in millisecond
 #define HALL_TRIGGER HIGH //hall sensor trigger signal
