@@ -45,7 +45,7 @@ byte fan_cnt_0 = 0;
 byte fan_cnt_1 = 0;
 byte fan_cnt_2 = 0;
 
-SoftwareSerial sserial (5, 6);  // receive pin, transmit pin
+SoftwareSerial sserial (5, 8);  // receive pin, transmit pin
 
 //Function prototype declaration
 void update_control(void);
