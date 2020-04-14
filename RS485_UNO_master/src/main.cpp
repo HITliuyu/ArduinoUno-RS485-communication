@@ -15,8 +15,9 @@
 #define MAX485_DE 4
 #define MAX_SLAVE_NUM 3
 #define RE_TRANS_NUM 2
-#define QUERY_PERIOD 5000//900000 //time interval to query slaves, 15 mins = 1000 * 60 * 15 = 900,000
+#define QUERY_PERIOD 5000 //time interval to query slaves, 15 mins = 1000 * 60 * 15 = 900,000
 #define SENSOR_READ_PERIOD 4000 //time interval to update local sensor reading
+#define BUFFER_UPDATE_PERIOD 15000 //time interval to sync control buffer to slaves
 #define HALL_TRIGGER LOW //hall sensor trigger signal
 
 #define DEBUG 1
@@ -67,6 +68,7 @@ byte checksum;
 //Modbus slave control variables
 //{LED white PWM, LED yellow PWM, Fan speed PWM, LED Switch, Fan Switch}
 byte slave_control_buffer[5] = {128, 128, 128, 0, 0};
+//byte slave_control_buffer[5] = {250, 250, 250, 1, 1};
 uint16_t slave_active_array[MAX_SLAVE_NUM] = {0};
 bool slave_control_buffer_update_flag = true;
 //bool slave_id_update_flag = true;
@@ -76,6 +78,7 @@ byte query_target_device_id = 1;
 byte update_target_device_id = 1;
 uint32_t last_read_sensor_time = 0;
 uint32_t last_query_slave_time = 0;
+uint32_t last_update_buffer_time = 0;
 const byte LED_PIN = 13;
 
 SoftwareSerial sserial (5, 6);  // receive pin, transmit pin
@@ -138,6 +141,7 @@ void setup()
     loop_state = SEND_UPDATE;//loop starts from checking slave id
     last_read_sensor_time = millis();
     last_query_slave_time = millis();
+    last_update_buffer_time = millis();
   
 }  // end of setup
 
@@ -307,11 +311,16 @@ void loop()
                 fan_cnt_2 = 0;
 
                 last_read_sensor_time = current_time;
-#if 0
-                //only used for test purpose to frequently update slaves
-                slave_control_buffer_update_flag = true;
-#endif
             }
+#if 1
+            //only used for test purpose to frequently update slaves
+             elapsed_time = current_time - last_update_buffer_time;
+            if(elapsed_time>=BUFFER_UPDATE_PERIOD)
+            {
+                slave_control_buffer_update_flag = true;
+                last_update_buffer_time = current_time;
+            }
+#endif
             //pwm output setting
             if(slave_control_buffer_update_flag)
             {
